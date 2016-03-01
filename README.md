@@ -45,3 +45,13 @@ Browse to http://127.0.0.1:8080 and add two mapping entries: (don't forget to ad
   - Custom tags: `client_max_body_size 250m;`
 
 Now you can try http://127.0.0.1/pma/ and http://example.com/ in your browser.
+
+## Tags
+
+Yeast is built on top of nginx in Debian stretch, and Debian provides three variants of nginx, each have different prebuilt modules
+
+- [light](https://packages.debian.org/stretch/nginx-light): minimal set of features and modules
+- [full](https://packages.debian.org/stretch/nginx-full): the complete set of standard modules
+- [extras](https://packages.debian.org/stretch/nginx-extras): standard modules, plus extra features and modules such as the Perl module
+
+Default tag (latest) is pointed to light.
