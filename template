@@ -28,7 +28,7 @@ RUN export deps="git wget ca-certificates" \
 # install nginx
 RUN apt-get update \
  && apt-get install -y --no-install-recommends nginx-%tag% \
- && ln -sf /etc/init.d/nginx /etc/ynit/
+ && ln -sf /etc/init.d/nginx /etc/ynit/ \
  && apt-get clean \
  && rm -fr /var/lib/apt/lists/*
 
