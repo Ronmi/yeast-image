@@ -1,0 +1,38 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:       yeast
+# Required-Start:
+# Required-Stop:
+# X-Start-Before: nginx
+# X-Stop-After:
+### END INIT INFO
+
+NAME=yeast
+EXEC=/usr/local/bin/yeast
+PIDFILE=/var/run/yeast.pid
+DATADIR=/var/lib/yeast/
+DATA="$DATADIR/data.json"
+UIDIR=/usr/local/share/yeast
+
+[[ -d "$DATADIR" ]] || mkdir -p "$DATADIR"
+[[ -f "$DATA" ]] || echo '[]' > "$DATA"
+
+. /lib/lsb/init-functions
+
+case $1 in
+    start)
+        log_begin_msg "Starting yeast"
+        start-stop-daemon --start --pidfile "$PIDFILE" --make-pidfile -b --exec "$EXEC" -d "$UIDIR" -- \
+                          -data "$DATA" -conf /etc/nginx/sites-enabled/default -addr ":8080"
+        log_end_msg $?
+        ;;
+    stop)
+        log_begin_msg "Stopping yeast"
+        start-stop-daemon --stop --oknodo --pidfile "$PIDFILE" --name "$NAME" --remove-pidfile
+        log_end_msg $?
+        ;;
+    *)
+        echo "Usage: $0 start|stop"
+        exit 1
+        ;;
+esac
