@@ -23,7 +23,7 @@ RUN export deps="git wget ca-certificates" \
  && diff -u0 dpkg.orig dpkg.new | grep '^\+[a-z0-9]'|sed 's/+//' | xargs apt-get purge -y --purge \
  && apt-get autoremove --purge -y \
  && apt-get clean \
- && rm -fr /var/lib/apt/lists/* $GOPATH $GOROOT
+ && rm -fr /var/lib/apt/lists/* $GOPATH $GOROOT /dpkg.orig /dpkg.new
 
 # install nginx
 RUN apt-get update \
