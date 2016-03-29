@@ -23,7 +23,7 @@ case $1 in
     start)
         log_begin_msg "Starting yeast"
         start-stop-daemon --start --pidfile "$PIDFILE" --make-pidfile -b --exec "$EXEC" -d "$UIDIR" -- \
-                          -data "$DATA" -conf /etc/nginx/sites-enabled/default -addr ":8080"
+                          -data "$DATA" -conf /etc/nginx/sites-enabled/default -addr ":8080" -fe "$UIDIR/index.html"
         log_end_msg $?
         ;;
     stop)

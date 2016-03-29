@@ -2,7 +2,7 @@
 FROM ronmi/ynit-image:stretch
 MAINTAINER Ronmi Ren <ronmi@patrolavia.com>
 
-ENV YEASTVER v0.1
+ENV YEASTVER v0.2
 ENV GOVER 1.6
 
 # install yeast
