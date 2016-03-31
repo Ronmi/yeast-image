@@ -13,6 +13,7 @@ PIDFILE=/var/run/yeast.pid
 DATADIR=/var/lib/yeast/
 DATA="$DATADIR/data.json"
 UIDIR=/usr/local/share/yeast
+NGINX=/etc/nginx/sites-enabled/default
 
 [[ -d "$DATADIR" ]] || mkdir -p "$DATADIR"
 [[ -f "$DATA" ]] || echo '[]' > "$DATA"
@@ -22,8 +23,12 @@ UIDIR=/usr/local/share/yeast
 case $1 in
     start)
         log_begin_msg "Starting yeast"
+
+	# reset nginx config first
+	echo -n '' > "$NGINX"
+
         start-stop-daemon --start --pidfile "$PIDFILE" --make-pidfile -b --exec "$EXEC" -d "$UIDIR" -- \
-                          -data "$DATA" -conf /etc/nginx/sites-enabled/default -addr ":8080" -fe "$UIDIR/index.html"
+                          -data "$DATA" -conf "$NGINX" -addr ":8080" -fe "$UIDIR/index.html"
         log_end_msg $?
         ;;
     stop)
