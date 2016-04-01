@@ -34,4 +34,4 @@ RUN apt-get update \
 
 ADD yeast /etc/ynit/
 EXPOSE 80 8080
-VOLUME ["/var/lib/yeast", "/usr/local/share/yeast", "/etc/nginx"]
+VOLUME ["/var/lib/yeast", "/etc/nginx"]
