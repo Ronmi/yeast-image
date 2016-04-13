@@ -24,7 +24,7 @@ docker run -d --net mynet --name pma -e PMA_HOST=mysql phpmyadmin/phpmyadmin
 docker run -d --net mynet --name wp -e WORDPRESS_DB_HOST=mysql -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=my-secret wordpress
 ```
 
-Then create yeast container in the network, so it can connect to your microservices with container name (s1/s2/s3 above).
+Then create yeast container in the network, so it can connect to your microservices with container name (mysql/pma/wp above).
 
 ```sh
 # don't forget to expose 80 and 8080 port!
@@ -55,3 +55,17 @@ Yeast is built on top of nginx in Debian stretch, and Debian provides three vari
 - [extras](https://packages.debian.org/stretch/nginx-extras): standard modules, plus extra features and modules such as the Perl module
 
 Default tag (latest) is pointed to light.
+
+## Security
+
+Yeast UI serves at separated port (default 8080) without any protection. You should make sure the port is not accessible through untrusted network. You can use firewall to ensure that. Binding it to localhost might be the most simple solution, since Yeast is mainly designed for test purpose.
+
+```sh
+docker run -d --name yeast -p 80:80 -p 127.0.0.1:8080:8080 ronmi/yeast
+```
+
+# License
+
+Copyright (C) 2016 Ronmi Ren <ronmi@patrolavia.com>
+
+WTFPL, see LICENSE.txt for detail.
