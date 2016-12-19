@@ -64,6 +64,8 @@ Yeast UI serves at separated port (default 8080) without any protection. You sho
 docker run -d --name yeast -p 80:80 -p 127.0.0.1:8080:8080 ronmi/yeast
 ```
 
+After yeast 0.2.4, password authentication is supported, set a password via `-e YEAST_PASSWORD=mypass` and see what happends.
+
 # License
 
 Copyright (C) 2016 Ronmi Ren <ronmi@patrolavia.com>

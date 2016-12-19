@@ -28,7 +28,7 @@ case $1 in
 	echo -n '' > "$NGINX"
 
         start-stop-daemon --start --pidfile "$PIDFILE" --make-pidfile -b --exec "$EXEC" -d "$UIDIR" -- \
-                          -data "$DATA" -conf "$NGINX" -addr ":8080" -fe "$UIDIR/index.html"
+                          -data "$DATA" -conf "$NGINX" -addr ":8080" -fe "$UIDIR" -pass "$YEAST_PASSWORD"
         log_end_msg $?
         ;;
     stop)

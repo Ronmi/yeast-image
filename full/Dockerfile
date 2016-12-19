@@ -2,8 +2,8 @@
 FROM ronmi/ynit-image:stretch
 MAINTAINER Ronmi Ren <ronmi@patrolavia.com>
 
-ENV YEASTVER v0.2.3
-ENV GOVER 1.6.1
+ENV YEASTVER v0.2.4
+ENV GOVER 1.7.4
 
 # install yeast
 RUN export deps="git wget ca-certificates" \
@@ -18,7 +18,7 @@ RUN export deps="git wget ca-certificates" \
  && wget -q -O - https://storage.googleapis.com/golang/go$GOVER.linux-amd64.tar.gz | tar zxf - \
  && mkdir -p $YEASTDIR $YEASTLIB \
  && git clone -b $YEASTVER https://github.com/Ronmi/yeast $YEASTDIR \
- && (cd $YEASTDIR && $GOROOT/bin/go get && $GOROOT/bin/go build && cp $YEASTDIR/yeast /usr/local/bin/ && cp $YEASTDIR/index.html $YEASTLIB/) \
+ && (cd $YEASTDIR && $GOROOT/bin/go get && $GOROOT/bin/go build && cp $YEASTDIR/yeast /usr/local/bin/ && cp $YEASTDIR/index.html $YEASTDIR/login.html $YEASTLIB/) \
  && dpkg -l | awk '{print $2}' > /dpkg.new \
  && diff -u0 dpkg.orig dpkg.new | grep '^\+[a-z0-9]'|sed 's/+//' | xargs apt-get purge -y --purge \
  && apt-get autoremove --purge -y \
